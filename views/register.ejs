@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <h1>Register</h1>
+  <form action="/register" method="POST" onsubmit="return validatePassword()">
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="password" id="password" name="password" placeholder="Password" required>
+    <span id="passwordError" style="color: red;"></span><br>
+    <button type="submit">Register</button>
+  </form>
+  <a href="/login">Login</a>
+
+  <script>
+    function validatePassword() {
+      var password = document.getElementById("password").value;
+      var passwordError = document.getElementById("passwordError");
+
+      var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
+      if (!passwordRegex.test(password)) {
+        passwordError.textContent = "Password must be 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number.";
+        return false;
+      } else {
+        passwordError.textContent = "";
+        return true;
+      }
+    }
+  </script>
+</body>
+</html>
